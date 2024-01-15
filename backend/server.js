@@ -1,11 +1,14 @@
 const dotenv = require("dotenv").config(); //This will give access to .env file for server.js
 const express = require("express");
-const connectDB = require("./config/connectDB")
+const connectDB = require("./config/connectDB");
+const taskRoutes = require("./routes/taskRoutes")
 
 
 const app = express();
 //Middleware
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use("/api/tasks",taskRoutes);
 // const logger = (req , res, next) =>{
 //     console.log("Middleware");
 //     console.log(req.method);
@@ -19,11 +22,7 @@ app.get("/", (req, res) =>{
     }
 })
 
-//Create Task
-app.post("/api/tasks", async (req, res) =>{
-    console.log(req.body);
-    res.send("Task Created")
-})
+
 
 const PORT = process.env.PORT || 1000;
 const startServer = async () =>{
