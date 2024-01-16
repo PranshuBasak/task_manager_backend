@@ -53,18 +53,22 @@ const deleteTask = async (req, res) =>{
         res.status(500).json({msg: error.message});
     }
 };
-
-//Delete All Task
-const deleteAllTask = async (req, res) =>{
+// Delete All Tasks
+const deleteAllTasks = async (req, res) => {
     try {
-        await Task.deleteMany({});
-        res.status(200).send("All tasks deleted");
+        // Use Mongoose deleteMany to delete all tasks
+        const result = await Task.deleteMany();
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json("No tasks found to delete.");
+        }
+
+        res.status(200).json("All tasks deleted successfully.");
     } catch (error) {
-        console.log(error);
-        res.status(500).json({msg: error.message});
+        console.error(error);
+        res.status(500).json({ msg: error.message });
     }
 };
- 
 //Update Task/PUT
 const updateTask = async (req, res) =>{
     try {
@@ -106,5 +110,5 @@ module.exports = {
     deleteTask,
     updateTask,
     updatePatchTask,
-    deleteAllTask
+    deleteAllTasks
 }
