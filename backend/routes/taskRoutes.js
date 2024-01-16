@@ -1,6 +1,6 @@
 const express = require("express");
 const Task = require("../model/taskModel");
-const {createTask, getAllTask, getTask, deleteTask, updateTask, updatePatchTask, deleteAllTask} = require("../controllers/taskController")
+const {createTask, getAllTask, getTask, deleteTask, updateTask, updatePatchTask, deleteAllTasks} = require("../controllers/taskController")
 const router = express.Router();
 
 // Read/GET
@@ -10,9 +10,10 @@ router.get("/:id", getTask);
 //Create Task/
 router.post("/", createTask);
 
+// Delete All Tasks
+router.delete("/delete-all", deleteAllTasks);
 //Delete Task
 router.delete("/:id", deleteTask);
-router.delete("/", deleteAllTask);
 
 //Update Task| PATCH & PUT
 router.route("/:id").put(updateTask).patch(updatePatchTask); // Way to compress common router
