@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: false}));
 // app.use(cors()); This will allow to receive url request from everly url
 app.use("/api/tasks",taskRoutes);
 app.use(cors({
-    origin: ["http://localhost:3000/"] //use to specify a specific url path to receive request
+    origin: ["http://localhost:3000/","https://taskmanager-4jat.onrender.com/"] //use to specify a specific url path to receive request
 }))
 
 // const logger = (req , res, next) =>{
